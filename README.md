@@ -39,7 +39,7 @@ It includes:
 - OR utilization metrics  
 
 **Sample Data Extract:**  
-![Data Table](img/data_table.png)
+![Data Table](img/EPIC.png)
 
 ---
 
@@ -49,7 +49,7 @@ It includes:
 The semantic layer is built using SQL views that transform raw encounter-level data into analytic-ready structures.
 
 **Example View: Surgeon Performance**  
-![SQL View](img/sql_view.png)
+![SQL View](img/VIEW.png)
 
 Views include:
 
@@ -67,7 +67,7 @@ Views include:
 The Power BI model follows a **clean star schema**, with fact tables at the center and dimensions radiating outward.
 
 **Semantic Model Diagram:**  
-![Data Model](img/data_model.png)
+![Data Model](img/ERD.png)
 
 ---
 
@@ -76,7 +76,7 @@ The Power BI model follows a **clean star schema**, with fact tables at the cent
 All metrics are built using clean, reusable DAX patterns.
 
 **Example Metric: High-Risk ASA %**  
-![DAX Code](img/dax_code.png)
+![DAX Code](img/DAX.png)
 
 ---
 
@@ -86,7 +86,7 @@ All metrics are built using clean, reusable DAX patterns.
 This section will showcase the final Power BI dashboard once completed.
 
 **Current Placeholder:**  
-![Dashboard Placeholder](img/dashboard_temp.png)
+![Dashboard Placeholder](img/TEMP.png)
 
 ---
 

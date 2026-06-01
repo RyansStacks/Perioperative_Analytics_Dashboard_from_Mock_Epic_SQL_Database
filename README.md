@@ -5,7 +5,7 @@ Mock perioperative surgery data is wrangled into SQL Views and then source into 
 # 🏥 Perioperative Analytics Dashboard  
 ### Power BI • SQL • DAX • Healthcare Data Modeling
 
-![Dashboard Placeholder](img/dashboard_temp.png)
+![Dashboard Placeholder](img/TEMP.png)
 > *Final dashboard screenshot will be added tomorrow.*
 
 ---

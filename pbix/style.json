@@ -1,0 +1,111 @@
+{
+  "name": "Healthcare Enterprise Theme",
+  "dataColors": [
+    "#2A9DF4",
+    "#3A4750",
+    "#90E0EF",
+    "#0077B6",
+    "#0A2342",
+    "#4A4A4A"
+  ],
+  "background": "#F5F7FA",
+  "foreground": "#000000",
+  "tableAccent": "#2A9DF4",
+
+  "visualStyles": {
+    "*": {
+      "*": {
+        "title": [
+          {
+            "color": { "solid": { "color": "#0A2342" } },
+            "fontSize": 16,
+            "fontFamily": "Calibri"
+          }
+        ],
+        "background": [
+          {
+            "color": { "solid": { "color": "#FFFFFF" } }
+          }
+        ],
+        "border": [
+          {
+            "color": { "solid": { "color": "#D9D9D9" } },
+            "show": true
+          }
+        ]
+      }
+    },
+
+    "card": {
+      "*": {
+        "title": [
+          {
+            "color": { "solid": { "color": "#3A4750" } },
+            "fontSize": 11,
+            "fontFamily": "Calibri"
+          }
+        ],
+        "labels": [
+          {
+            "color": { "solid": { "color": "#0A2342" } },
+            "fontSize": 26,
+            "fontFamily": "Calibri"
+          }
+        ],
+        "categoryLabels": [
+          {
+            "color": { "solid": { "color": "#4A4A4A" } },
+            "fontSize": 10,
+            "fontFamily": "Calibri"
+          }
+        ]
+      }
+    },
+
+    "tableEx": {
+      "*": {
+        "columnHeaders": [
+          {
+            "fontSize": 12,
+            "fontFamily": "Calibri",
+            "color": { "solid": { "color": "#FFFFFF" } },
+            "background": { "solid": { "color": "#0A2342" } }
+          }
+        ],
+        "values": [
+          {
+            "fontSize": 11,
+            "fontFamily": "Calibri",
+            "color": { "solid": { "color": "#000000" } }
+          }
+        ],
+        "totals": [
+          {
+            "fontSize": 11,
+            "fontFamily": "Calibri",
+            "color": { "solid": { "color": "#000000" } }
+          }
+        ]
+      }
+    },
+
+    "slicer": {
+      "*": {
+        "header": [
+          {
+            "fontSize": 12,
+            "fontFamily": "Calibri",
+            "color": { "solid": { "color": "#0A2342" } }
+          }
+        ],
+        "items": [
+          {
+            "fontSize": 11,
+            "fontFamily": "Calibri",
+            "color": { "solid": { "color": "#000000" } }
+          }
+        ]
+      }
+    }
+  }
+}

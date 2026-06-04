@@ -76,11 +76,6 @@ RXNORM_CODES = [
 # 2. Helpers
 # -----------------------
 
-def random_dates(start, end, n):
-    start_u = start.value // 10**9
-    end_u = end.value // 10**9
-    return pd.to_datetime(np.random.randint(start_u, end_u, n), unit='s')
-
 def make_row_status(n):
     return np.random.choice(["0", "-1", "-2", "-3"], size=n, p=[0.9, 0.05, 0.03, 0.02])
 
@@ -88,6 +83,51 @@ def to_varchar(df: pd.DataFrame) -> pd.DataFrame:
     for c in df.columns:
         df[c] = df[c].astype(str)
     return df
+
+# -----------------------
+# NEW REALISTIC ADMIT TIME GENERATOR
+# -----------------------
+
+def generate_realistic_admit_times(start, end, n):
+    dates = []
+    current = start
+
+    weekday_weights = {
+        0: 1.3,  # Monday
+        1: 1.25, # Tuesday
+        2: 1.2,  # Wednesday
+        3: 1.15, # Thursday
+        4: 0.9,  # Friday
+        5: 0.35, # Saturday
+        6: 0.30  # Sunday
+    }
+
+    seasonal_weights = {
+        1: 1.15, 2: 1.10, 12: 1.20,
+        6: 0.85, 7: 0.80, 8: 0.90
+    }
+
+    all_days = pd.date_range(start, end, freq="D")
+    day_weights = []
+
+    for d in all_days:
+        w = weekday_weights[d.weekday()]
+        w *= seasonal_weights.get(d.month, 1.0)
+        day_weights.append(w)
+
+    day_weights = np.array(day_weights)
+    day_weights = day_weights / day_weights.sum()
+
+    sampled_days = np.random.choice(all_days, size=n, p=day_weights)
+
+    admit_times = []
+    for d in sampled_days:
+        hour = np.random.normal(loc=9.5, scale=2.5)
+        hour = np.clip(hour, 6, 17)
+        minute = np.random.randint(0, 60)
+        admit_times.append(d + pd.Timedelta(hours=hour, minutes=minute))
+
+    return pd.to_datetime(admit_times)
 
 # -----------------------
 # 3. Dimensions
@@ -161,7 +201,7 @@ def build_encounter_fact(n_encounters=150000):
     provider_ids = np.random.randint(1, 24 + 1, size=n_encounters)
     payor_ids = np.random.randint(1, len(PAYORS) + 1, size=n_encounters)
 
-    admit_times = random_dates(start, end, n_encounters)
+    admit_times = generate_realistic_admit_times(start, end, n_encounters)
 
     month = admit_times.month
     seasonal_multiplier = np.where(month.isin([12,1,2]), 1.2,
@@ -187,7 +227,6 @@ def build_encounter_fact(n_encounters=150000):
         "SurgeonDurableKey": provider_ids,
         "PayorDurableKey": payor_ids,
 
-        # FIXED: remove .dt
         "AdmitDateTime": admit_times.strftime("%Y-%m-%d %H:%M:%S"),
         "SurgeryStart": surgery_starts.strftime("%Y-%m-%d %H:%M:%S"),
         "SurgeryEnd": surgery_ends.strftime("%Y-%m-%d %H:%M:%S"),
